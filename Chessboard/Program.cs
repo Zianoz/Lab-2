@@ -11,87 +11,87 @@ namespace Chessboard
     {
         static void Main(string[] args)
         {
-            /* Ser till att "◼︎" och "◻︎" printas ut korrekt i konsolen.*/
+            /* Ensures that "◼︎" and "◻︎" are printed correctly in the console. */
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-            /* Låter användaren skriva in hur många rader och kolumner de vill ha genom att ändra str till int genom int.Parse som senare sparas som variabler. */
+            /* Allows the user to input how many rows and columns they want by converting str to int via int.Parse, which is then stored as variables. */
             Console.WriteLine("Välj hur många rader du vill ha på schackbrädan");
-            int kolumn = int.Parse(Console.ReadLine());
+            int column = int.Parse(Console.ReadLine());
             Console.WriteLine("\n");
             Console.WriteLine("Välj hur många kolumner du vill ha på shackbrädan");
-            int rader = int.Parse(Console.ReadLine());
+            int rows = int.Parse(Console.ReadLine());
             Console.WriteLine("\n");
             Console.WriteLine("Vill du ha default brädan (Svart och Vit, '1') eller (Custom? '2') ");
-            int svar = int.Parse(Console.ReadLine());
+            int answer = int.Parse(Console.ReadLine());
 
-            string vit = "◼︎";
-            string svart = "◻︎";
+            string white = "◼︎";
+            string black = "◻︎";
 
-            // Skapar en switch där den använder svar från den föregående frågan för att välja om använder vill använda default brädan eller ha en custom bräda som de kan välja själva. 
-            switch (svar)
+            // Creates a switch that uses the answer from the previous question to decide if the user wants the default board or a custom board where they can choose themselves.
+            switch (answer)
             {
                 case 1:
                     break;
 
                 case 2:
-                    /* Låter användaren skriva in vilka tecken programmet ska skriva ut som svart och vit. */
+                    /* Allows the user to input which characters the program should print as black and white. */
                     Console.WriteLine("Vilket tecken vill du ska vara vit?");
-                    vit = Console.ReadLine();
+                    white = Console.ReadLine();
                     Console.WriteLine("Vilket Tecken vill du ska vara svart?");
-                    svart = Console.ReadLine();
+                    black = Console.ReadLine();
                     Console.WriteLine("\n");
                     break;
 
-                // Om användaren skriver något annat än 1 eller 2 kör den case 1 helt enkelt eftersom den är default eftersom jag redan har gett pjäserna en symbol utanför switch.
+                // If the user enters something other than 1 or 2, it runs case 1, as it's the default since I have already given the pieces a symbol outside the switch.
                 default:
                     Console.WriteLine("Fel!, Schackbrädan kommer nu att använda default brädan");
                     break;
 
             }
 
-            //Frågar användaren vilken pjäs de vill ha och sparar valet i (spelare). Frågar sedan användaren vart de vill lägga pjäsen och sparar värdet i position.
+            // Asks the user which piece they want and saves the choice in (player). Then asks the user where they want to place the piece and saves the value in position.
             Console.WriteLine("Vilken Pjäs vill du ha?");
-            string spelare = Console.ReadLine();
+            string player = Console.ReadLine();
             Console.WriteLine("Vart vill du lägga din pjäs? Ex: A2, D5");
             string position = Console.ReadLine();
 
-            /* Skapar en variabel till den första bokstaven från användarens input */
+            /* Creates a variable from the first letter of the user's input */
             char pos = position[0];
 
-            /* Tar användarens kolumnnummer minus A's ASCII värde vilket är 65 och lägger till 1 så att det börjar från 1 och inte 0 om det är tillexempel A5 som har valts.*/
-            int kolumnvarde = pos - 'A' + 1;
+            /* Takes the user's column number minus A's ASCII value which is 65 and adds 1 so that it starts from 1 and not 0 if, for example, A5 is chosen. */
+            int columnvalue = pos - 'A' + 1;
 
-            /* Omvandlar användarens rad val till en string */
-            int radervarde = int.Parse(position[1].ToString());
+            /* Converts the user's row choice to a string */
+            int rowvalue = int.Parse(position[1].ToString());
 
 
-            /* Detta är en forloop för rader. i är värdet för rader och loopar tills värdet som användaren skrev in.*/
-            for (int i = 1; i <= rader; i++)
+            /* This is a for-loop for rows. i is the value for rows and loops until the value entered by the user. */
+            for (int i = 1; i <= rows; i++)
             {
-                /*Denna är en forloop för kolumner där x är värdet för kolumner och den loopar till det värdet användaren skrev in.*/
-                for (int x = 1; x <= kolumn; x++)
+                /* This is a for-loop for columns where x is the value for columns and loops to the value entered by the user. */
+                for (int x = 1; x <= column; x++)
                 {
-                    // Kollar om kolumnvärde är likamed X och om radervarde är likamed i, om ja skriver den ut spelarens pjäs istället för svart eller vit.
-                    if ((kolumnvarde == x) && (radervarde == i))
+                    // Checks if the column value is equal to X and if the row value is equal to i, if yes, it prints the player's piece instead of black or white.
+                    if ((columnvalue == x) && (rowvalue == i))
                     {
-                        Console.Write(spelare);
+                        Console.Write(player);
                     }
 
-                    /* Tar (i + x) och kollar om det är jämt genom % modulus. Om användaren skriver in 10/2 blir det 0 kvar men om det är 10/3 kommer det bli 1 kvar vilket är ojämt.*/
+                    /* Takes (i + x) and checks if it is even using the modulus %. If the user enters 10/2, it will be 0, but if it's 10/3, it will leave 1, which is odd. */
                     else if ((i + x) % 2 == 0)
                     {
-                        Console.Write(vit);
+                        Console.Write(white);
                     }
 
-                    /* Om det blir något över efter (i + x) printar den ut ◻︎ */
+                    /* If there is something left after (i + x), it prints ◻︎ */
                     else
                     {
-                        Console.Write(svart);
+                        Console.Write(black);
                     }
 
                 }
 
-                /* När kolumnerna har blivit klara på den raden kolumnloopen ligger på bryter programmet raden och börjar på en ny rad.*/
+                /* When the columns are done on the current row the column loop is on, the program breaks the line and starts a new row. */
                 Console.WriteLine();
 
             }
